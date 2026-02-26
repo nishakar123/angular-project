@@ -64,7 +64,9 @@ export class Vehicle implements OnInit {
         this.getVehicles(); // Refresh the list after deletion
         alert('Vehicle deleted successfully');
       },
-      error: (err) => console.error('Error deleting vehicle', err),
+      error: (err) => {
+        console.error('Error deleting vehicle', err)
+        alert('Failed to delete vehicle');},
     });
   }
 
