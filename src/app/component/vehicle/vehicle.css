@@ -83,7 +83,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   max-width: 500px;
   width: 90%;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
 }
 
@@ -125,7 +125,7 @@
 .table-wrapper thead th {
   position: sticky;
   top: 0;
-  background: #51c9d6
+  background: #51c9d6;
   z-index: 2;
   border-bottom: 2px solid #dee2e6;
 }
