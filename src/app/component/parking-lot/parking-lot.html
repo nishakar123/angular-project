@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <div class="row">
+    @for (lot of parkingLots; track $index) {
+      <div class="col-sm-4 mb-3 mb-sm-0">
+        <a [routerLink]="['/vehicle', lot.id]" style="text-decoration: none;">
+          <div class="card" style="cursor: pointer;">
+            <div class="card-body" style="background-color:aquamarine;">
+              <h5 class="card-title">{{ lot.parkingLotName }}</h5>
+              <p class="card-text">Lot Id : {{ lot.id }}</p>
+              <p class="card-text">Parked Vehicles : {{ lot.vehicles.length }}</p>
+              <p class="card-text">{{ lot.parkingLotDescription }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    }
+  </div>
+</div>

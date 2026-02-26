@@ -1,0 +1,146 @@
+<div class="container mt-4">
+  <div class="row align-items-center mb-3">
+    <div class="col text-start">
+      <h2>Vehicles in Parking Lot</h2>
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-primary" (click)="parkVehicle()">Park Vehicle</button>
+    </div>
+  </div>
+  <div class="row">
+    @if (vehicles.length > 0) {
+      <div class="table-wrapper">
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Index</th>
+                <th scope="col">Owner Name</th>
+                <th scope="col">Plate Number</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Engine Type</th>
+                <th scope="col">Color</th>
+                <th scope="col">Weight (kg)</th>
+                <th scope="col">Description</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Updated By</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Updated Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (vehicle of vehicles; track $index) {
+                <tr>
+                  <th scope="row">{{ $index + 1 }}</th>
+                  <td>{{ vehicle.name }}</td>
+                  <td>{{ vehicle.plateNumber }}</td>
+                  <td>{{ vehicle.vehicleType }}</td>
+                  <td>{{ vehicle.engineType }}</td>
+                  <td>{{ vehicle.color }}</td>
+                  <td>{{ vehicle.weight }}</td>
+                  <td>{{ vehicle.description }}</td>
+                  <td>{{ vehicle.createdBy }}</td>
+                  <td>{{ vehicle.updatedBy }}</td>
+                  <td>{{ vehicle.created | date:'medium' }}</td>
+                  <td>{{ vehicle.updated | date:'medium' }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-warning" (click)="editVehicle(vehicle)">Edit</button>
+                    <div>&nbsp;</div>
+                    <button class="btn btn-sm btn-danger" (click)="deleteVehicle(vehicle.id)">Delete</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    } @else {
+      <div class="alert alert-info">No vehicles in this parking lot</div>
+    }
+  </div>
+</div>
+
+<!-- Park Vehicle Modal -->
+@if (showParkModal) {
+  <div class="modal-overlay" (click)="closeParkModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h5 class="modal-title">Park New Vehicle</h5>
+        <button type="button" class="btn-close" (click)="closeParkModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form #vehicleForm="ngForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Owner Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="parkVehicleForm.name" name="name" placeholder="Enter owner name" #name="ngModel" required>
+            @if (name.invalid && (name.touched || name.dirty)) {
+              <div class="text-danger">Owner name is required.</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="plateNumber" class="form-label">Plate Number</label>
+            <input type="text" class="form-control" id="plateNumber" [(ngModel)]="parkVehicleForm.plateNumber" name="plateNumber" placeholder="e.g., ABC-1234" #plateNumber="ngModel" required>
+            @if (plateNumber.invalid && (plateNumber.touched || plateNumber.dirty)) {
+              <div class="text-danger">Plate number is required.</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="vehicleType" class="form-label">Vehicle Type</label>
+            <select class="form-select" id="vehicleType" [(ngModel)]="parkVehicleForm.vehicleType" name="vehicleType" #vehicleType="ngModel" required>
+              <option value="CAR">Car</option>
+              <option value="BIKE">Bike</option>
+              <option value="TRUCK">Truck</option>
+              <option value="BUS">Bus</option>
+            </select>
+            @if (vehicleType.invalid && (vehicleType.touched || vehicleType.dirty)) {
+              <div class="text-danger">Vehicle type is required.</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="engineType" class="form-label">Engine Type</label>
+            <select class="form-select" id="engineType" [(ngModel)]="parkVehicleForm.engineType" name="engineType" #engineType="ngModel" required>
+              <option value="PETROL">Petrol</option>
+              <option value="DIESEL">Diesel</option>
+              <option value="HYBRID">Hybrid</option>
+              <option value="ELECTRIC">Electric</option>
+            </select>
+            @if (engineType.invalid && (engineType.touched || engineType.dirty)) {
+              <div class="text-danger">Engine type is required.</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="color" class="form-label">Color</label>
+            <input type="text" class="form-control" id="color" [(ngModel)]="parkVehicleForm.color" name="color" placeholder="Enter vehicle color" #color="ngModel" required>
+            @if (color.invalid && (color.touched || color.dirty)) {
+              <div class="text-danger">Color is required.</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="weight" class="form-label">Weight (kg)</label>
+            <input type="number" class="form-control" id="weight" [(ngModel)]="parkVehicleForm.weight" name="weight" placeholder="Enter vehicle weight" #weight="ngModel" required>
+            @if (weight.invalid && (weight.touched || weight.dirty)) {
+              <div class="text-danger">Weight is required.</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" [(ngModel)]="parkVehicleForm.description" name="description" rows="3" placeholder="Enter vehicle description" #description="ngModel" required></textarea>
+            @if (description.invalid && (description.touched || description.dirty)) {
+              <div class="text-danger">Description is required.</div>
+            }
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeParkModal()">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()" >Reset</button>
+        @if (parkVehicleForm.parkingLotId == null || parkVehicleForm.parkingLotId == '') {
+          <button type="button" class="btn btn-primary" [disabled]="vehicleForm.invalid" (click)="saveVehicle('Save')">Park Vehicle</button>
+        }@else{
+          <button type="button" class="btn btn-warning" [disabled]="vehicleForm.invalid" (click)="saveVehicle('Update')">Update Vehicle</button>
+        }
+      </div>
+    </div>
+  </div>
+}

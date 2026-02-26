@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api-service';
 import { FormsModule } from '@angular/forms';
 import { NaPipe } from '../../pipe/na-pipe';
-import { isActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +14,7 @@ import { isActive } from '@angular/router';
 export class Admin implements OnInit {
   users: any[] = [];
 
-  userObj: any = {
+  userObjForm: any = {
     id: '',
     username: '',
     password: '',
@@ -31,7 +30,7 @@ export class Admin implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +49,7 @@ export class Admin implements OnInit {
   }
 
   createUser(form: any) {
-    this.apiService.post<any>('user/create', this.userObj).subscribe({
+    this.apiService.post<any>('user/create', this.userObjForm).subscribe({
       next: () => {
         this.loadUsers(); // Reload users to reflect the new entry
         alert('User saved successfully');
@@ -62,7 +61,7 @@ export class Admin implements OnInit {
   }
 
   editUser(user: any) {
-    this.userObj = {
+    this.userObjForm = {
       id: user.id,
       username: user.username,
       password: user.password,
@@ -78,9 +77,9 @@ export class Admin implements OnInit {
   }
 
   updateUser(form: any) {
-    const user = this.userObj;
+    const user = this.userObjForm;
     debugger;
-    this.apiService.put<any>('user/update/' + user.id, this.userObj).subscribe({
+    this.apiService.put<any>('user/update/' + user.id, this.userObjForm).subscribe({
       next: () => {
         this.loadUsers(); // Reload users to reflect the updated entry
         alert('User updated successfully');
@@ -92,7 +91,6 @@ export class Admin implements OnInit {
   }
 
   deleteUser(id: number) {
-    debugger;
     const isDeleted = confirm('Are you sure you want to delete this user?');
     if (isDeleted) {
       this.apiService.delete<any>('user/delete/' + id).subscribe({
@@ -106,7 +104,7 @@ export class Admin implements OnInit {
   }
 
   resetFormData() {
-    this.userObj = {
+    this.userObjForm = {
       id: '',
       username: '',
       password: '',
@@ -122,7 +120,7 @@ export class Admin implements OnInit {
   }
 
   resetForm(userForm: any) {
-    this.userObj = {
+    this.userObjForm = {
       id: '',
       username: '',
       password: '',

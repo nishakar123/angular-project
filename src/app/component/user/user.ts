@@ -59,11 +59,15 @@ export class User implements OnInit {
     });
   }
 
-  saveUser() {
+  saveUser(event: Event) {
     this.apiService.post<any>('user/create', this.userForm.value).subscribe({
       next: (data) => {
         this.loadUserData(); // Reload user data to reflect the new entry
-        alert('User data saved successfully');
+        if(event instanceof SubmitEvent && event.submitter instanceof HTMLButtonElement && event.submitter.textContent?.trim() === 'Save') {
+          alert('User saved successfully');
+        }else{
+          alert('User data updated successfully');
+        }
         this.userForm.reset();
       },
       error: (err) => console.error('Error saving user data', err),
@@ -72,19 +76,6 @@ export class User implements OnInit {
 
   editUser(user: any) {
     this.userForm.patchValue(this.mapValuesToForm(user));
-  }
-
-  updateUser() {
-    const user = this.userForm.value;
-    this.apiService.put<any>('user/update/' + user.id, user).subscribe({
-      next: (data) => {
-        console.log('User data updated successfully', data);
-        this.loadUserData(); // Reload user data to reflect the updated entry
-        alert('User data updated successfully');
-        this.userForm.reset();
-      },
-      error: (err) => console.error('Error updating user data', err),
-    });
   }
 
   mapValuesToForm(user: any) {

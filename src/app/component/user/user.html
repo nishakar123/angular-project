@@ -52,7 +52,7 @@
       <h4 class="h4 bg-info">User Form (Reactive Form Example)</h4>
       <hr />
     </div>
-    <form class="row g-3" [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <form class="row g-3" [formGroup]="userForm" (ngSubmit)="saveUser($event)">
       <div class="col-md-2">
         <label class="form-label">User Name</label>
         <input type="text" class="form-control" formControlName="username">

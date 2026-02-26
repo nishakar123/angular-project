@@ -25,6 +25,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Address</th>
                 <th scope="col">Is Active</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -62,7 +63,7 @@
         <form #userForm="ngForm" class="row g-3 needs-validation">
           <div class="col-md-12">
             <label class="form-label">Username<span class="text-danger">*</span></label>
-            <input type="text" name="username" #username="ngModel" required [(ngModel)]="userObj.username"
+            <input type="text" name="username" #username="ngModel" required [(ngModel)]="userObjForm.username"
               class="form-control">
             @if (username.invalid && (username.touched || username.dirty)) {
             <div class="text-danger">Username is required.</div>
@@ -70,7 +71,7 @@
           </div>
           <div class="col-md-12">
             <label class="form-label">Password<span class="text-danger">*</span></label>
-            <input type="password" name="password" #password="ngModel" required [(ngModel)]="userObj.password"
+            <input type="password" name="password" #password="ngModel" required [(ngModel)]="userObjForm.password"
               class="form-control">
             @if (password.invalid && (password.touched || password.dirty)) {
             <div class="text-danger">Password is required.</div>
@@ -78,7 +79,7 @@
           </div>
           <div class="col-md-12">
             <label class="form-label">User Type<span class="text-danger">*</span></label>
-            <select name="userType" #userType="ngModel" required [(ngModel)]="userObj.userType" class="form-select">
+            <select name="userType" #userType="ngModel" required [(ngModel)]="userObjForm.userType" class="form-select">
               <option selected disabled value="">Select...</option>
               <option>ADMIN</option>
               <option>USER</option>
@@ -89,21 +90,21 @@
           </div>
           <div class="col-md-12">
             <label class="form-label">Name<span class="text-danger">*</span></label>
-            <input type="text" name="name" #name="ngModel" required [(ngModel)]="userObj.name" class="form-control">
+            <input type="text" name="name" #name="ngModel" required [(ngModel)]="userObjForm.name" class="form-control">
             @if (name.errors?.['required'] && (name.touched || name.dirty)) {
             <div class="text-danger">Name is required.</div>
             }
           </div>
           <div class="col-md-12">
             <label class="form-label">Age<span class="text-danger">*</span></label>
-            <input type="text" name="age" #age="ngModel" required [(ngModel)]="userObj.age" class="form-control">
+            <input type="text" name="age" #age="ngModel" required [(ngModel)]="userObjForm.age" class="form-control">
             @if (age.errors?.['required'] && (age.touched || age.dirty)) {
             <div class="text-danger">Age is required.</div>
             }
           </div>
           <div class="col-md-12">
             <label class="form-label">Gender<span class="text-danger">*</span></label>
-            <select name="gender" #gender="ngModel" required [(ngModel)]="userObj.gender" class="form-select">
+            <select name="gender" #gender="ngModel" required [(ngModel)]="userObjForm.gender" class="form-select">
               <option selected disabled value="">Select...</option>
               <option>MALE</option>
               <option>FEMALE</option>
@@ -114,21 +115,21 @@
           </div>
           <div class="col-md-12">
             <label class="form-label">Phone<span class="text-danger">*</span></label>
-            <input type="text" name="phone" #phone="ngModel" required [(ngModel)]="userObj.phone" class="form-control">
+            <input type="text" name="phone" #phone="ngModel" required [(ngModel)]="userObjForm.phone" class="form-control">
             @if (phone.errors?.['required'] && (phone.touched || phone.dirty)) {
             <div class="text-danger">Phone is required.</div>
             }
           </div>
           <div class="col-md-12">
             <label class="form-label">Email<span class="text-danger">*</span></label>
-            <input type="text" name="email" #email="ngModel" required [(ngModel)]="userObj.email" class="form-control">
+            <input type="text" name="email" #email="ngModel" required [(ngModel)]="userObjForm.email" class="form-control">
             @if (email.errors?.['required'] && (email.touched || email.dirty)) {
             <div class="text-danger">Email is required.</div>
             }
           </div>
           <div class="col-md-12">
             <label class="form-label">Address<span class="text-danger">*</span></label>
-            <textarea name="address" #address="ngModel" required [(ngModel)]="userObj.address" class="form-control" placeholder="Enter Address Here"></textarea>
+            <textarea name="address" #address="ngModel" required [(ngModel)]="userObjForm.address" class="form-control" placeholder="Enter Address Here"></textarea>
             @if (address.errors?.['required'] && (address.touched || address.dirty)) {
             <span class="text-danger">
               Please enter a valid address.
@@ -136,13 +137,13 @@
             }
           </div>
           <div class="col-md-12">
-            <input name="isActive" type="checkbox" class="form-check-input is-invalid" [(ngModel)]="userObj.isActive">&nbsp;
+            <input name="isActive" type="checkbox" class="form-check-input is-invalid" [(ngModel)]="userObjForm.isActive">&nbsp;
             <label>
               is User Active?
             </label>
           </div>
           <div class="col-12 d-flex gap-2 sticky-actions">
-            @if (userObj.id == null || userObj.id == 0) {
+            @if (userObjForm.id == null || userObjForm.id == 0) {
             <button class="btn btn-primary" type="button" [disabled]="userForm.invalid"
               (click)="createUser(userForm)">Save</button>
             }@else{

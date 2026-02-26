@@ -15,11 +15,17 @@ export class ApiService {
 
   // Generic GET request
   get<T>(endpoint: string, params?: HttpParams): Observable<T> {
+    if(endpoint.startsWith('http')) {
+      return this.http.get<T>(endpoint, { params });
+    }
     return this.http.get<T>(`${this.baseUrl}/${endpoint}`, { params });
   }
 
   // Generic POST request
   post<T>(endpoint: string, body: any, headers?: HttpHeaders): Observable<T> {
+    if(endpoint.startsWith('http')) {
+      return this.http.post<T>(endpoint, body, { headers });
+    }
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body, { headers });
   }
 
@@ -35,6 +41,9 @@ export class ApiService {
 
   // Generic DELETE request
   delete<T>(endpoint: string, params?: HttpParams): Observable<T> {
+    if(endpoint.startsWith('http')) {
+      return this.http.delete<T>(endpoint, { params });
+    }
     return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, { params });
   }
 }
