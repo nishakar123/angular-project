@@ -1,0 +1,77 @@
+<div class="container">
+  <h1>Home Page</h1>
+  <div class="welcome-message">
+    <p>Welcome to the Home Page!</p>
+  </div>
+  <div class="row p-3">
+    <div class="col-md-12">
+      <app-progress-bar [progress]="70"></app-progress-bar>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <app-button-tabs [buttonTabs]="['Employees', 'Students']" (onButtonClickeOutput)="onButtonChange($event)"></app-button-tabs>
+    </div>
+  </div>
+  @if (currentButtonTab === 'Students') {
+    <div class="row p-3">
+    <div class="col-md-12">
+      <h3>Student List</h3>
+      <div class="table-responsive table-wrapper">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Age</th>
+              <th scope="col">Attendance (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (student of students; track $index) {
+            <tr>
+              <td>{{student.id}}</td>
+              <td>{{student.name}}</td>
+              <td>{{student.age}}</td>
+              <td>
+                <app-progress-bar [progress]="student.attendance"></app-progress-bar>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  }@else {
+    <div class="row p-3">
+    <div class="col-md-12">
+      <h3>Employee List</h3>
+      <div class="table-responsive table-wrapper">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Position</th>
+              <th scope="col">Attendance (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (employee of employees; track $index) {
+            <tr>
+              <td>{{employee.id}}</td>
+              <td>{{employee.name}}</td>
+              <td>{{employee.position}}</td>
+              <td>
+                <app-progress-bar [progress]="employee.attendance"></app-progress-bar>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  }
+</div>

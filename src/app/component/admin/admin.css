@@ -1,0 +1,68 @@
+/* Parent container should use viewport height */
+.cards-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  height: calc(100vh - 170px);
+}
+
+/* Common card styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Left card (table card) */
+.card:nth-child(1) {
+  flex: 8;
+}
+
+/* Right card */
+.card:nth-child(2) {
+  flex: 2;
+}
+
+/* Card body must stretch */
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Table wrapper = ONLY scroll container */
+.table-wrapper {
+  flex: 1;
+  overflow-y: auto;   /* vertical scroll */
+  overflow-x: hidden;   /* horizontal scroll when needed */
+}
+
+/* Table rules */
+.table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* Optional: fixed header */
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+.scrollable-card-body {
+  max-height: calc(100vh - 250px); /* adjust for navbar + header */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sticky-actions {
+  position: sticky;
+  bottom: 0;
+  background: white;     /* important */
+  padding: 10px 0;
+  z-index: 5;
+  border-top: 1px solid #ddd;
+}

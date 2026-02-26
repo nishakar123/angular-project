@@ -1,0 +1,21 @@
+.table {
+  font-size: 0.875rem;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow: auto;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: #7ee795;
+  z-index: 2;
+}
+
+.table-wrapper {
+  height: 550px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

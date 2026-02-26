@@ -1,0 +1,16 @@
+    <div class="page-center">
+    <form action="">
+        <span class="title">Sign In</span>
+        <input type="email" name="email" [(ngModel)]="loginObject.email" id="mail" placeholder="Email Address">
+        <input type="password" name="password" [(ngModel)]="loginObject.password" id="password" placeholder="Password">
+        <div class="button">
+            <input type="submit" value="Login" class="submit" (click)="onLogin()">
+            <span class="rip1"></span>
+            <span class="rip2"></span>
+        </div>
+        <div class="links">
+            <a href="#">Sign up</a>
+            <a href="#">Forgot your password?</a>
+        </div>
+    </form>
+    </div>

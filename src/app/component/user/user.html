@@ -1,0 +1,174 @@
+<div class="container-fluid">
+  <h1>User Page</h1>
+  <!-- <p>List of Users</p> -->
+  <div class="container-fluid p-2 my-2 border">
+    <div class="table-wrapper">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Index</th>
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Usertype</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Is Active</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          @for (user of users; track $index ) {
+          <tr>
+            <td>{{$index + 1}}</td>
+                <td>{{user.id | na}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.userType}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.isActive}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" (click)="editUser(user)">Edit</button>
+              <div>&nbsp;</div>
+              <button class="btn btn-sm btn-danger" (click)="deleteUser(user.id)">Delete</button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="container-fluid p-2 my-2 border">
+    <div class="col-md-12">
+      <h4 class="h4 bg-info">User Form (Reactive Form Example)</h4>
+      <hr />
+    </div>
+    <form class="row g-3" [formGroup]="userForm" (ngSubmit)="saveUser()">
+      <div class="col-md-2">
+        <label class="form-label">User Name</label>
+        <input type="text" class="form-control" formControlName="username">
+        @if (userForm.get('username')?.invalid && (userForm.get('username')?.dirty ||
+        userForm.get('username')?.touched)) {
+        <span class="text-danger">
+          Please enter a valid username.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Password</label>
+        <input type="text" class="form-control" formControlName="password">
+        @if (userForm.controls['password'].invalid && (userForm.controls['password']?.dirty ||
+        userForm.controls['password'].touched)) {
+        <span class="text-danger">
+          Please enter a valid password.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">User Type</label>
+        <select class="form-select" formControlName="userType">
+          <option selected disabled value="">Select...</option>
+          <option>ADMIN</option>
+          <option>USER</option>
+        </select>
+        @if (userForm.controls['userType'].invalid && (userForm.controls['userType']?.dirty ||
+        userForm.controls['userType'].touched)) {
+        <span class="text-danger">
+          Please select user type.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Name</label>
+        <div class="input-group">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control" formControlName="name">
+          @if (userForm.controls['name'].invalid && (userForm.controls['name']?.dirty ||
+          userForm.controls['name'].touched)) {
+          <span class="text-danger">
+            Please enter a valid name.
+          </span>
+          }
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Age</label>
+        <input type="text" class="form-control" formControlName="age">
+        @if (userForm.controls['age'].invalid && (userForm.controls['age']?.dirty ||
+        userForm.controls['age'].touched)) {
+        <span class="text-danger">
+          Please enter a valid age.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Gender</label>
+        <select class="form-select" formControlName="gender">
+          <option selected disabled value="">Select...</option>
+          <option>MALE</option>
+          <option>FEMALE</option>
+        </select>
+        @if (userForm.controls['gender'].invalid && (userForm.controls['gender']?.dirty ||
+        userForm.controls['gender'].touched)) {
+        <span class="text-danger">
+          Please select gender.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Phone</label>
+        <input type="text" class="form-control" formControlName="phone">
+        @if (userForm.controls['phone'].invalid && (userForm.controls['phone']?.dirty ||
+        userForm.controls['phone'].touched)) {
+        <span class="text-danger">
+          Please enter a valid phone number.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" formControlName="email">
+        @if (userForm.controls['email'].invalid && (userForm.controls['email']?.dirty ||
+        userForm.controls['email'].touched)) {
+        <span class="text-danger">
+          Please enter a valid email.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Address</label>
+        <textarea class="form-control" formControlName="address" placeholder="Enter Address Here"></textarea>
+        @if (userForm.controls['address'].invalid && (userForm.controls['address']?.dirty ||
+        userForm.controls['address'].touched)) {
+        <span class="text-danger">
+          Please enter a valid address.
+        </span>
+        }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Is Active ?</label><br />
+        <input type="checkbox" class="form-check-input is-invalid" formControlName="isActive">&nbsp;
+        <label>
+          is User Active?
+        </label>
+      </div>
+      <div class="col-12 d-flex gap-2">
+        @if (userForm.controls['id'].value == 0 || userForm.controls['id'].value == null) {
+        <button class="btn btn-primary" [disabled]="userForm.invalid" type="submit">Save</button>
+        }@else{
+        <button class="btn btn-warning" [disabled]="userForm.invalid" type="submit">Update</button>
+        }
+        <button class="btn btn-secondary" (click)="resetForm()" type="button">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>

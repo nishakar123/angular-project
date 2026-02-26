@@ -1,0 +1,5 @@
+<div class="btn-group">
+  @for (buttonTab of buttonTabs; track $index) {
+    <button type="button" class="btn btn-primary" [ngClass]="activeTab === buttonTab ? 'btn-info' : ''" (click)="onButtonClick(buttonTab)">{{buttonTab}}</button>
+  }
+</div>
