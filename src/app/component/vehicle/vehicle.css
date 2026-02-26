@@ -100,12 +100,16 @@
   margin: 0;
 }
 
-.btn-close {
-  background: none;
+.modal-header .btn-close {
+  background-color: #ff5b5b;
+  color: #e1d1d1;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #888;
 }
 
 .modal-body {
